@@ -63,19 +63,30 @@ ax.text(adopted + 0.5, ax.get_ylim()[0] + 0.05,
 ax.set_xlabel("Bootstrap block length (days)")
 ax.set_ylabel("Reserve ratio (real / independence)")
 ax.set_title("Robustness: ratio vs. bootstrap block length", pad=5)
-ax.legend(framealpha=0.85, edgecolor="none")
 ax.set_xticks(blocks)
 ax.set_xticklabels([str(b) for b in blocks])
 
 # Annotate stability
 ratio_range = ratios.max() - ratios.min()
-ax.text(0.97, 0.10,
-        f"Ratio range across blocks:\n${ratios.min():.2f}$ to ${ratios.max():.2f}$ "
-        f"(spread $\\Delta={ratio_range:.3f}$)",
-        transform=ax.transAxes, ha="right", va="bottom", fontsize=7,
-        bbox=dict(fc="white", ec=C_RATIO, lw=0.5, alpha=0.9, pad=3))
+stability_note = (
+    f"Ratio range across blocks: "
+    f"${ratios.min():.2f}$ to ${ratios.max():.2f}$ "
+    f"(spread $\\Delta={ratio_range:.3f}$)"
+)
 
 fig.tight_layout(pad=0.4)
+
+# Legend below plot (outside axes)
+ax.legend(
+    loc="upper center", bbox_to_anchor=(0.5, -0.16),
+    ncol=3, framealpha=0.85, edgecolor="none", columnspacing=1.2,
+)
+ax.text(
+    0.5, -0.32, stability_note,
+    transform=ax.transAxes, ha="center", va="top", fontsize=7,
+    bbox=dict(fc="white", ec=C_RATIO, lw=0.5, alpha=0.9, pad=3),
+    clip_on=False,
+)
 save_publication_figure(fig, OUT)
 plt.close()
 print(f"[OK] Fig A.2 saved → {OUT}")

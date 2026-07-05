@@ -61,14 +61,23 @@ ax.axhline(0.047, color=C_GRAD, lw=0.9, ls="--",
 ax.set_xlabel(r"Magnitude threshold $|\Delta k|_\mathrm{sharp}$")
 ax.set_ylabel("Spatial coherence $r$ (Pearson, across pairs)")
 ax.set_title("Robustness: sharp/gradual contrast vs. threshold", pad=5)
-ax.legend(framealpha=0.85, edgecolor="none", loc="upper left")
 ax.set_ylim(0, 0.42)
-ax.text(0.97, 0.05,
-        "Contrast ratio $\\approx$4.5 stable\nacross threshold choices",
-        transform=ax.transAxes, ha="right", va="bottom", fontsize=7,
-        bbox=dict(fc="white", ec="#333", lw=0.5, alpha=0.9, pad=3))
+
+contrast_note = "Contrast ratio $\\approx$4.5 stable across threshold choices"
 
 fig.tight_layout(pad=0.4)
+
+# Legend below plot (outside axes)
+ax.legend(
+    loc="upper center", bbox_to_anchor=(0.5, -0.16),
+    ncol=2, framealpha=0.85, edgecolor="none", columnspacing=1.2,
+)
+ax.text(
+    0.5, -0.32, contrast_note,
+    transform=ax.transAxes, ha="center", va="top", fontsize=7,
+    bbox=dict(fc="white", ec="#333", lw=0.5, alpha=0.9, pad=3),
+    clip_on=False,
+)
 save_publication_figure(fig, OUT)
 plt.close()
 print(f"[OK] Fig A.1 saved → {OUT}")
