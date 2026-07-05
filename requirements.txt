@@ -1,0 +1,40 @@
+# ── Core ─────────────────────────────────────────────────────────────────────
+numpy>=1.26,<3
+pandas>=2.2,<3
+scipy>=1.13,<2
+
+# ── Solar / geoespacial ───────────────────────────────────────────────────────
+pvlib>=0.11,<1
+pyproj>=3.6,<4
+
+# ── Modelagem estatística ─────────────────────────────────────────────────────
+statsmodels>=0.14,<1
+
+# ── Paralelismo e IO ──────────────────────────────────────────────────────────
+joblib>=1.4,<2
+pyarrow>=19.0.1,<25   # ATENÇÃO: NÃO usar 19.0.0 -- bug conhecido "Repetition level
+                       # histogram size mismatch" ao LER (não escrever) parquets com
+                       # colunas obrigatórias (ex. strings sem nulos); corrigido em 19.0.1
+                       # (https://github.com/apache/arrow/issues/45283)
+numba>=0.60,<1   # JIT do loop sequencial do Swinging-Door Trending (B5/B6)
+
+# ── Ponte para R (texmex, evd, POT) ──────────────────────────────────────────
+rpy2>=3.5,<4
+
+# ── Download de dados (B1 Zenodo, B7 KNMI) ───────────────────────────────────
+requests>=2.31,<3
+
+# ── Vento em altura opcional (B7b — CERRA via CDS API, requer cadastro) ──────
+cdsapi>=0.7,<1
+xarray>=2024.1,<2027
+netcdf4>=1.6,<2
+
+# ── Visualização ─────────────────────────────────────────────────────────────
+matplotlib>=3.9,<4
+seaborn>=0.13,<1
+
+# ── Testes ───────────────────────────────────────────────────────────────────
+pytest>=8,<9
+
+# ── R packages necessários (instalar via R console):
+#    install.packages(c("texmex", "evd", "POT"))
